@@ -36,35 +36,49 @@ void agregarContacto() {
         cout << "Digite sus nombres y apellidos completos: "; getline(cin, nuevoContacto.nombresCompletos);
         cout << "Digite su sexo (masculino M, femenino F): "; cin >> nuevoContacto.sexo;
         cout << "Digite su edad: "; cin >> nuevoContacto.edad;
+        cin.ignore();
         cout << "Digite su telefono: "; getline(cin, nuevoContacto.telefono);
         cout << "Digite su correo: "; getline(cin, nuevoContacto.email);
         cout << "Digite su nacionalidad: "; getline(cin, nuevoContacto.nacionalidad);
-        contactos[numContactosRegistrados+1] = nuevoContacto; //Desperdiciando memoria de indice 0
+        contactos[numContactosRegistrados] = nuevoContacto;
+		numContactosRegistrados++; 
     } else {
         cout << "No es posible agregar más contactos,capacidad maxima.\n";
     }
 }
 
+void mostrarContactos() {
+    for (int i = 0; i < numContactosRegistrados; ++i) {
+    	cout<<"\nContacto "<<i+1<<":\n";
+        cout << "\nNombre: " << contactos[i].nombresCompletos << "\nSexo: " << contactos[i].sexo
+             << "\nEdad: " << contactos[i].edad << "\nTelefono: " << contactos[i].telefono
+             << "\nEmail: " << contactos[i].email << "\nNacionalidad: " << contactos[i].nacionalidad << endl;
+             
+    }
+}
 
 int main() {
 	SetConsoleOutputCP(CP_UTF8);
     char opcion;
     do {
-        cout << "BIENVENIDO A LA GESTION DE CONTACTOS.\n\n"
+    	
+        cout << "\n\nBIENVENIDO A LA GESTION DE CONTACTOS.\n\n"
              << "a) Agregar un contacto\n"
              << "b) Eliminar un contacto\n"
              << "c) Mostrar listado general de contactos registrados hasta ese momento.\n"
              << "d) Mostrar listado de contactos existentes, ordenado por servidor de correo de las cuentas\n"
              << "e) Salir del programa\n"
-             << "Selecciona una opción: "<< endl;
+             << "\nSelecciona una opción: "<< endl;
         cin >> opcion;
         switch(opcion) {
             case 'a':
+            	system("cls");
                 agregarContacto();
                 break;
             case 'b':
                 break;
             case 'c':
+            	mostrarContactos();
                 break;
             case 'd':
                 break;
