@@ -125,8 +125,11 @@ int main() {
             	system("cls");
             	mostrarContactosPorCorreo();
                 break;
+            case 'e':
+                break;
             default:
                 cout << "Opcion invalida. Intente otra vez.\n\n";
+                
                 break;
         }
     } while(opcion != 'e');
