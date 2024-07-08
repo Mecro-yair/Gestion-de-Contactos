@@ -25,7 +25,7 @@ struct contactoEmail {
     string email;
     string nacionalidad;
 };
-
+//UNIVERSALES
 int numContactosRegistrados = 0;
 contactoEmail contactos[100];
 
@@ -48,12 +48,37 @@ void agregarContacto() {
 }
 
 void mostrarContactos() {
+	SetConsoleOutputCP(CP_UTF8);
     for (int i = 0; i < numContactosRegistrados; ++i) {
     	cout<<"\nContacto "<<i+1<<":\n";
         cout << "\nNombre: " << contactos[i].nombresCompletos << "\nSexo: " << contactos[i].sexo
              << "\nEdad: " << contactos[i].edad << "\nTelefono: " << contactos[i].telefono
              << "\nEmail: " << contactos[i].email << "\nNacionalidad: " << contactos[i].nacionalidad << endl;
              
+    }
+    if (numContactosRegistrados==0){
+    	cout<<"NO TIENE CONTACTOS AGREGADOS.";
+	}
+}
+
+void eliminarContacto() {
+    string email;
+    cout << "Digite el correo del contacto a eliminar: "; cin >> email; //Pedire numero.
+    bool encontrado = false;
+    
+    for (int i = 0; i < numContactosRegistrados; ++i) {
+        if (contactos[i].email == email) {
+            for (int j = i; j < numContactosRegistrados - 1; ++j) {
+                contactos[j] = contactos[j + 1];
+            }
+            numContactosRegistrados--;
+            encontrado = true;
+            cout << "El contacto digitado se a eliminado correctamente.\n";
+            break;
+        }
+    }
+    if (!encontrado) { //!encontrado: si no se encontro nada
+        cout << "El contacto pedido a eliminar no existe.\n";
     }
 }
 
@@ -76,8 +101,10 @@ int main() {
                 agregarContacto();
                 break;
             case 'b':
+            	eliminarContacto();
                 break;
             case 'c':
+            	system("cls");
             	mostrarContactos();
                 break;
             case 'd':
