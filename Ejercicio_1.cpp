@@ -81,7 +81,21 @@ void eliminarContacto() {
         cout << "El contacto pedido a eliminar no existe.\n";
     }
 }
-
+void mostrarContactosPorCorreo(){
+    for (int i = 0; i < numContactosRegistrados; ++i) {
+        for (int j = i + 1; j < numContactosRegistrados; ++j) {
+            string servidorDeCorreo1 = contactos[i].email.substr(contactos[i].email.find('@') + 1); 
+            string servidorDeCorreo2 = contactos[j].email.substr(contactos[j].email.find('@') + 1); 
+            if (servidorDeCorreo1 > servidorDeCorreo2) {
+                contactoEmail guardadoTemporal = contactos[i];
+                contactos[i] = contactos[j];
+                contactos[j] = guardadoTemporal;
+            }
+        }
+    }
+    cout<<"\nCONTACTOS ORDENADOS ALFABATICAMENTE.\n";
+    mostrarContactos();
+}
 int main() {
 	SetConsoleOutputCP(CP_UTF8);
     char opcion;
@@ -108,12 +122,11 @@ int main() {
             	mostrarContactos();
                 break;
             case 'd':
-                break;
-            case 'e':
+            	system("cls");
+            	mostrarContactosPorCorreo();
                 break;
             default:
                 cout << "Opcion invalida. Intente otra vez.\n\n";
-                
                 break;
         }
     } while(opcion != 'e');
